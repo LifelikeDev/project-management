@@ -2,7 +2,7 @@ const projects = [
   {
     id: "1",
     clientId: "1",
-    name: "eCommerce Website",
+    name: "School Budget Management App",
     description:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
     status: "In Progress",
@@ -10,7 +10,7 @@ const projects = [
   {
     id: "2",
     clientId: "2",
-    name: "Dating App",
+    name: "Bus Tracking",
     description:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
     status: "In Progress",
@@ -18,7 +18,7 @@ const projects = [
   {
     id: "3",
     clientId: "3",
-    name: "SEO Project",
+    name: "Casual Chatroom",
     description:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
     status: "In Progress",
@@ -26,7 +26,7 @@ const projects = [
   {
     id: "4",
     clientId: "4",
-    name: "Design Prototype",
+    name: "Mobile App (iOS)",
     description:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
     status: "Done",
@@ -34,7 +34,7 @@ const projects = [
   {
     id: "5",
     clientId: "5",
-    name: "Auction Website",
+    name: "Frenemies",
     description:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
     status: "In Progress",
@@ -44,9 +44,9 @@ const projects = [
 const clients = [
   {
     id: "1",
-    name: "Tony Stark",
-    email: "ironman@gmail.com",
-    phone: "343-567-4333",
+    name: "Adwoa Ekubi",
+    email: "adwoa.ekubi@friends.com",
+    phone: "233-234-1234",
   },
   {
     id: "2",
@@ -56,20 +56,20 @@ const clients = [
   },
   {
     id: "3",
-    name: "Thor Odinson",
-    email: "thor@gmail.com",
+    name: "Simon Arthur",
+    email: "sarthur21@gmail.com",
     phone: "324-331-4333",
   },
   {
     id: "4",
-    name: "Steve Rogers",
-    email: "steve@gmail.com",
+    name: "Fred Nimo-Baako",
+    email: "baako.fred@allies.com",
     phone: "344-562-6787",
   },
   {
     id: "5",
-    name: "Bruce Banner",
-    email: "bruce@gmail.com",
+    name: "Johnson Turkson",
+    email: "jtturk@live.com",
     phone: "321-468-8887",
   },
 ];
