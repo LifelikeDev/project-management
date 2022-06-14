@@ -33,7 +33,7 @@ const ProjectType = new GraphQLObjectType({
     client: {
       type: ClientType,
       resolve(parent, args) {
-        return Client.findById(parent.id);
+        return Client.findById(parent.clientId);
       },
     },
   }),
@@ -134,6 +134,16 @@ const mutation = new GraphQLObjectType({
         return project.save();
       }
     },
+    // delete a project
+    deleteProject: {
+      type: ProjectType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Project.findByIdAndRemove(args.id);
+      }
+    }
   },
 });
 
