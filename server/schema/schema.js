@@ -114,12 +114,12 @@ const mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: "ProjectStatus",
             values: {
-              'new': { value: 'Not Started' },
-              'progress': { value: 'In Progress' },
-              'completed': { value: 'Completed' },
+              new: { value: "Not Started" },
+              progress: { value: "In Progress" },
+              completed: { value: "Completed" },
             },
           }),
-          defaultValue: "Not Started"
+          defaultValue: "Not Started",
         },
         clientId: { type: new GraphQLNonNull(GraphQLID) },
       },
@@ -128,11 +128,11 @@ const mutation = new GraphQLObjectType({
           name: args.name,
           description: args.description,
           status: args.status,
-          clientId: args.clientId
-        })
+          clientId: args.clientId,
+        });
 
         return project.save();
-      }
+      },
     },
     // delete a project
     deleteProject: {
@@ -142,8 +142,40 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         return Project.findByIdAndRemove(args.id);
-      }
-    }
+      },
+    },
+    // update a project
+    updateProject: {
+      type: ProjectType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        status: {
+          type: new GraphQLEnumType({
+            name: "ProjectStatusUpdate",
+            values: {
+              new: { value: "Not Started" },
+              progress: { value: "In Progress" },
+              completed: { value: "Completed" },
+            },
+          }),
+        },
+      },
+      resolve(parent, args) {
+        return Project.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              name: args.name,
+              description: args.description,
+              status: args.status,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
   },
 });
 
