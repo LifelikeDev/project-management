@@ -1,16 +1,7 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
-
-const GET_CLIENTS = gql`
-  query getClients {
-      clients {
-        id
-        name
-        email
-        phone
-      }
-  }
-`;
+import { useQuery } from "@apollo/client";
+import ClientRow from "./ClientRow";
+import { GET_CLIENTS } from "../queries/clientQueries";
 
 const Clients = () => {
   const { loading, error, data } = useQuery(GET_CLIENTS);
@@ -23,7 +14,25 @@ const Clients = () => {
     return <p>Oops! Something broke...</p>;
   }
 
-  return <>{!loading && !error && <h2>Clients</h2>}</>;
+  return (
+    <>
+      {!loading && !error && (
+        <table className="table table-hover mt-3">
+          <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {data.clients.map((client) => (
+              <ClientRow key={client.id} client={client} />
+            ))}
+          </tbody>
+        </table>
+      )}
+    </>
+  );
 };
 
 export default Clients;
