@@ -18,7 +18,7 @@ const Projects = () => {
   return (
     <>
       {data.projects.length > 0 ? (
-        <div className="row card my-4">
+        <div className="row card my-4 bg-light">
           <h3 className="text-center my-3">Projects</h3>
           <div className="row">
             {data.projects.map((project) => (
