@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import Project from "./pages/Project";
 
 // create custom cache
 const cache = new InMemoryCache({
@@ -39,7 +40,8 @@ function App() {
           <div className="container">
             <Routes>
               <Route path="/" exact element={<Home />} />
-              <Route path="*" exact element={<NotFound />} />
+              <Route path='/projects/:id' element={<Project />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </Router>
