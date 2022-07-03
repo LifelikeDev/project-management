@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PROJECT } from "../queries/projectQueries";
 import Spinner from "../components/Spinner";
+import ClientInfo from "../components/ClientInfo";
 
 const Project = () => {
   const { id } = useParams();
@@ -33,7 +34,11 @@ const Project = () => {
           <h6 className="mt-3" style={{ fontSize: "16px" }}>
             Project Status
           </h6>
-          <p className="lead" style={{ fontSize: "14px" }}>{data.project.status}</p>
+          <p className="lead" style={{ fontSize: "14px" }}>
+            {data.project.status}
+          </p>
+
+          <ClientInfo client={data.project.client} />
         </div>
       )}
     </>
