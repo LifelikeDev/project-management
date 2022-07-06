@@ -19,7 +19,11 @@ const Clients = () => {
   }
 
   if (error) {
-    return <p>Oops! Something broke...</p>;
+    return (
+      <div className="d-flex align-items-center justify-content-center my-4">
+        <h2>Oops! Something broke while loading Clients...</h2>
+      </div>
+    );
   }
 
   return (

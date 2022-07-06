@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { FaList } from "react-icons/fa";
-import { ADD_CLIENT } from "../mutations/clientMutations";
+import { ADD_PROJECT } from "../mutations/projectMutations";
 import { GET_PROJECTS } from "../queries/projectQueries";
 import { GET_CLIENTS } from "../queries/clientQueries";
 
@@ -10,6 +10,17 @@ const AddProjectModal = () => {
   const [description, setDescription] = useState("");
   const [clientId, setClientId] = useState("");
   const [status, setStatus] = useState("new");
+
+  const [addProject] = useMutation(ADD_PROJECT, {
+    variables: { name, description, status, clientId },
+    update(cache, { data: { addProject } }) {
+      const { projects } = cache.readQuery({ query: GET_PROJECTS });
+      cache.writeQuery({
+        query: GET_PROJECTS,
+        data: { projects: projects.concat([addProject]) },
+      });
+    },
+  });
 
   const { loading, error, data } = useQuery(GET_CLIENTS);
 
@@ -20,36 +31,29 @@ const AddProjectModal = () => {
       return window.alert("Please enter appropriate values...");
     }
 
+    addProject(name, description, status, clientId);
+
     setName("");
     setDescription("");
     setStatus("new");
     setClientId("");
   };
 
-  if (loading) {
-    return null;
-  }
-
-  if (error) {
-    return <p>Oops! Something broke...</p>;
-  }
-
   return (
-    !loading &&
-    !error && (
-      <>
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#addProjectModal"
-        >
-          <div className="d-flex align-items-center">
-            <FaList className="icon" />
-            <span>Add Project</span>
-          </div>
-        </button>
+    <>
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#addProjectModal"
+      >
+        <div className="d-flex align-items-center">
+          <FaList className="icon" />
+          <span>Add Project</span>
+        </div>
+      </button>
 
+      {!loading && !error && (
         <div
           className="modal fade"
           id="addProjectModal"
@@ -113,12 +117,12 @@ const AddProjectModal = () => {
                       value={clientId}
                       onChange={(e) => setClientId(e.target.value)}
                     >
-                      <option value=''>Select Client</option>
-                        {data.clients.map((client) => (
-                          <option key={client.id} value={client.id}>
+                      <option value="">Select Client</option>
+                      {data.clients.map((client) => (
+                        <option key={client.id} value={client.id}>
                           {client.name}
-                          </option>
-                        ))}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
@@ -134,8 +138,8 @@ const AddProjectModal = () => {
             </div>
           </div>
         </div>
-      </>
-    )
+      )}
+    </>
   );
 };
 
