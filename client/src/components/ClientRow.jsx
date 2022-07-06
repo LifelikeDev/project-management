@@ -3,19 +3,12 @@ import { useMutation } from "@apollo/client";
 import { AiFillDelete } from "react-icons/ai";
 import { DELETE_CLIENT } from "../mutations/clientMutations";
 import { GET_CLIENTS } from "../queries/clientQueries";
+import { GET_PROJECTS } from "../queries/projectQueries";
 
 const ClientRow = ({ client }) => {
   const [deleteClient] = useMutation(DELETE_CLIENT, {
     variables: { id: client.id },
-    update(cache, { data: { deleteClient } }) {
-      const { clients } = cache.readQuery({ query: GET_CLIENTS });
-      cache.writeQuery({
-        query: GET_CLIENTS,
-        data: {
-          clients: clients.filter((client) => client.id !== deleteClient.id),
-        },
-      });
-    },
+    refetchQueries: [{ query: GET_CLIENTS }, { query: GET_PROJECTS }],
   });
 
   return (
@@ -24,8 +17,8 @@ const ClientRow = ({ client }) => {
       <td>{client.email}</td>
       <td>{client.phone}</td>
       <td>
-        <button className="btn btn-md" onClick={deleteClient}>
-          <AiFillDelete className="text-danger" />
+        <button className="btn btn-danger btn-md" onClick={deleteClient}>
+          <AiFillDelete />
         </button>
       </td>
     </tr>
