@@ -8,7 +8,14 @@ const Clients = () => {
   const { loading, error, data } = useQuery(GET_CLIENTS);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <div className="d-flex align-items-center justify-content-center">
+        <div>
+          <p>Loading Clients...</p>
+          <Spinner />
+        </div>
+      </div>
+    );
   }
 
   if (error) {

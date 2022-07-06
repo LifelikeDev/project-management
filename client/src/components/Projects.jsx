@@ -8,7 +8,14 @@ const Projects = () => {
   const { loading, error, data } = useQuery(GET_PROJECTS);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <div className="d-flex align-items-center justify-content-center my-4">
+        <div>
+          <p>Loading Projects...</p>
+          <Spinner />
+        </div>
+      </div>
+    );
   }
 
   if (error) {
